@@ -2,28 +2,35 @@ import os
 import re
 import dns.resolver
 
-menu = """
-          ███▄ ▄███▓ ▄▄▄       ██▓ ██▓        ██▓ ███▄    █   █████▒▒█████
-         ▓██▒▀█▀ ██▒▒████▄    ▓██▒▓██▒       ▓██▒ ██ ▀█   █ ▓██   ▒▒██▒  ██▒
-         ▓██    ▓██░▒██  ▀█▄  ▒██▒▒██░       ▒██▒▓██  ▀█ ██▒▒████ ░▒██░  ██▒
-         ▒██    ▒██ ░██▄▄▄▄██ ░██░▒██░       ░██░▓██▒  ▐▌██▒░▓█▒  ░▒██   ██░
-         ▒██▒   ░██▒ ▓█   ▓██▒░██░░██████▒   ░██░▒██░   ▓██░░▒█░   ░ ████▓▒░
-         ░ ▒░   ░  ░ ▒▒   ▓▒█░░▓  ░ ▒░▓  ░   ░▓  ░ ▒░   ▒ ▒  ▒ ░   ░ ▒░▒░▒░
-         ░  ░      ░  ▒   ▒▒ ░ ▒ ░░ ░ ▒  ░    ▒ ░░ ░░   ░ ▒░ ░       ░ ▒ ▒░
-         ░      ░     ░   ▒    ▒ ░  ░ ░       ▒ ░   ░   ░ ░  ░ ░   ░ ░ ░ ▒
-                ░         ░  ░ ░      ░  ░    ░           ░            ░ ░
+NEON_PINK = "\033[38;2;255;0;180m"
+NEON_CYAN = "\033[38;2;0;255;255m"
+NEON_PURPLE = "\033[38;2;180;0;255m"
+NEON_BLUE = "\033[38;2;80;160;255m"
+NEON_GREEN = "\033[38;2;0;255;120m"
+NEON_RED = "\033[38;2;255;60;60m"
+RESET = "\033[0m"
 
+menu = f"""
+{NEON_CYAN}          ███▄ ▄███▓ ▄▄▄       ██▓ ██▓        ██▓ ███▄    █   █████▒▒█████{RESET}
+{NEON_PINK}         ▓██▒▀█▀ ██▒▒████▄    ▓██▒▓██▒       ▓██▒ ██ ▀█   █ ▓██   ▒▒██▒  ██▒{RESET}
+{NEON_PURPLE}         ▓██    ▓██░▒██  ▀█▄  ▒██▒▒██░       ▒██▒▓██  ▀█ ██▒▒████ ░▒██░  ██▒{RESET}
+{NEON_BLUE}         ▒██    ▒██ ░██▄▄▄▄██ ░██░▒██░       ░██░▓██▒  ▐▌██▒░▓█▒  ░▒██   ██░{RESET}
+{NEON_GREEN}         ▒██▒   ░██▒ ▓█   ▓██▒░██░░██████▒   ░██░▒██░   ▓██░░▒█░   ░ ████▓▒░{RESET}
+{NEON_CYAN}         ░ ▒░   ░  ░ ▒▒   ▓▒█░░▓  ░ ▒░▓  ░   ░▓  ░ ▒░   ▒ ▒  ▒ ░   ░ ▒░▒░▒░{RESET}
+{NEON_PINK}         ░  ░      ░  ▒   ▒▒ ░ ▒ ░░ ░ ▒  ░    ▒ ░░ ░░   ░ ▒░ ░       ░ ▒ ▒░{RESET}
+{NEON_PURPLE}         ░      ░     ░   ▒    ▒ ░  ░ ░       ▒ ░   ░   ░ ░  ░ ░   ░ ░ ░ ▒{RESET}
+{NEON_BLUE}                ░         ░  ░ ░      ░  ░    ░           ░            ░ ░{RESET}
 """
-menu2 = """
-[0] Back to main
-[1] Email Info
+
+menu2 = f"""
+{NEON_CYAN}[0] Back to main{RESET}
+{NEON_PINK}[1] Email Info{RESET}
 """
 
 def show_menu():
-    print(f"\033[31m{menu}")
-    print(f"\033[31m{menu2}\033[0m")
+    print(menu)
+    print(menu2)
 
-# Configure the DNS resolver globally with a custom nameserver to avoid using /etc/resolv.conf
 resolver = dns.resolver.Resolver(configure=False)
 resolver.nameservers = ['8.8.8.8', '8.8.4.4']
 
@@ -51,8 +58,7 @@ def get_email_info(email):
 
     try:
         mx_records = resolver.resolve(domain_all, 'MX')
-        mx_servers = [str(record.exchange) for record in mx_records]
-        info["mx_servers"] = mx_servers
+        info["mx_servers"] = [str(record.exchange) for record in mx_records]
     except (dns.resolver.NoAnswer, dns.resolver.NXDOMAIN):
         info["mx_servers"] = None
 
@@ -68,7 +74,7 @@ def get_email_info(email):
     except (dns.resolver.NoAnswer, dns.resolver.NXDOMAIN):
         info["dmarc_records"] = None
 
-    if "mx_servers" in info and info["mx_servers"]:
+    if info.get("mx_servers"):
         for server in info["mx_servers"]:
             if "google.com" in server:
                 info["google_workspace"] = True
@@ -78,35 +84,19 @@ def get_email_info(email):
     return info, domain_all, domain, tld, name
 
 def email_info():
-    email = input("\033[31mEmail >> \033[0m")
+    email = input(f"{NEON_RED}Email >> {RESET}")
     os.system('cls' if os.name == 'nt' else 'clear')
-    print(f"\033[31m{menu}\033[0m")
+    print(menu)
+
     info, domain_all, domain, tld, name = get_email_info(email)
 
-    try:
-        mx_servers = info["mx_servers"]
-        mx_servers = ' / '.join(mx_servers) if mx_servers else None
-    except:
-        mx_servers = None
-
-    try:
-        spf_records = info["spf_records"]
-    except:
-        spf_records = None
-
-    try:
-        dmarc_records = info["dmarc_records"]
-        dmarc_records = ' / '.join(dmarc_records) if dmarc_records else None
-    except:
-        dmarc_records = None
-
-    try:
-        google_workspace = info.get("google_workspace", None)
-    except:
-        google_workspace = None
+    mx_servers = ' / '.join(info["mx_servers"]) if info.get("mx_servers") else None
+    spf_records = ' / '.join(info["spf_records"]) if info.get("spf_records") else None
+    dmarc_records = ' / '.join(info["dmarc_records"]) if info.get("dmarc_records") else None
+    google_workspace = info.get("google_workspace", None)
 
     print(f"""
-\033[31m
+{NEON_CYAN}
     [+] Email      : {email}
     [+] Name       : {name}
     [+] Domain     : {domain}
@@ -116,7 +106,7 @@ def email_info():
     [+] Spf        : {spf_records}
     [+] Dmarc      : {dmarc_records}
     [+] Workspace  : {google_workspace}
-\033[0m
+{RESET}
     """)
 
 def main():
@@ -124,17 +114,17 @@ def main():
         os.system('cls' if os.name == 'nt' else 'clear')
         show_menu()
         try:
-            choice = int(input('\033[31mChoice >> \033[0m'))
+            choice = int(input(f'{NEON_RED}Choice >> {RESET}'))
             if choice == 0:
                 os.system('python cyb3rtech.py')
                 break
             elif choice == 1:
                 email_info()
             else:
-                print("\033[31m[!]\033[0m Invalid choice \033[31m[!]\033[0m")
+                print(f"{NEON_RED}[!] Invalid choice [!]{RESET}")
         except ValueError:
-            print("\033[31mPlease enter a valid number\033[0m")
-        input("\nPress Enter to return to the menu...\033[0m")
+            print(f"{NEON_RED}Please enter a valid number{RESET}")
+        input(f"\n{NEON_CYAN}Press Enter to return to the menu...{RESET}")
 
 if __name__ == "__main__":
     main()
