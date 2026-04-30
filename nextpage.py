@@ -41,10 +41,8 @@ $$$$***$$$$$$$$$$uuu   uu$$$$$$$$$***$$$*
             |Made by: JustNutellabrot|
             |___________________     |
             | Spyrod Version: v3     |
-            |_______________________ |
-     ⠀⠀⠀⠀⠀⠀⠀
-  (loading..)⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-  (loading..)
+            |______________________⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                 (loading..)
     """
     terminal_size = get_terminal_size()
     centered_text = center_text(text, terminal_size.columns)
@@ -61,7 +59,7 @@ def center_text(text, width):
     centered_lines = [(line.center(width)) for line in lines]
     return "\n".join(centered_lines)
 
-def main(pink):
+def main():
     os.system('cls' if os.name == 'nt' else 'clear')
     
     blinking()
