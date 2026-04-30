@@ -12,54 +12,36 @@ def center_text(text, width):
 
 def blinking():
     text = """
-⠀⠀⠀⠀⠀⠀ uu$:$:$:$:$:$uu
-          uu$$$$$$$$$$$$$$$$$uu
-         u$$$$$$$$$$$$$$$$$$$$$u
-         u$$$$$$$$$$$$$$$$$$$$$$$u
-       u$$$$$$$$$$$$$$$$$$$$$$$$$u
-       u$$$$$$$$$$$$$$$$$$$$$$$$$u
-       u$$$$$$*   *$$$*   *$$$$$$u
-       *$$$$*      u$u       $$$$*
-        $$$u       u$u       u$$$
-        $$$u      u$$$u      u$$$
-         *$$$$uu$$$   $$$uu$$$$*
-          *$$$$$$$*   *$$$$$$$*
-            u$$$$$$$u$$$$$$$u
-             u$*$*$*$*$*$*$u
-  uuu        $$u$ $ $ $ $u$$       uuu
- u$$$$        $$u$u$u$u$u$$       u$$$$
-  $$$$$uu      *$$$$$$$$$*     uu$$$$$$
-u$$$$$$$$$$$      *****    uuuu$$$$$$$$$
-$$$$***$$$$$$$$$$uuu   uu$$$$$$$$$***$$$*
- ***      **$$$$$$$$$$$uu **$***
-          uuuu **$$$$$$$$$$uuu
- u$$$uuu$$$$$$$$$uu **$$$$$$$$$$$uuu$$$
- $$$$$$$$$$****           **$$$$$$$$$$$*
-   *$$$$$*                      **$$$$**
-     $$$*    
-             ________________________       $$$$*
-            |Made by: JustNutellabrot|
-            |___________________     |
-            | Spyrod Version: v3     |
-            |_______________________ |
-                  (loading..)
+⠀⠀⠀⠀⠀def blinking():
+    text = """
+⠀⠀⠀⠀⠀⠀██████╗  █████╗ ██████╗ ██╗  ██╗    ███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗
+       ██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝    ████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██╔════╝
+       ██║  ██║███████║██████╔╝█████╔╝     ██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗
+       ██║  ██║██╔══██║██╔══██╗██╔═██╗     ██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║
+       ██████╔╝██║  ██║██║  ██║██║  ██╗    ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║
+       ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+
+       [██████░░░░░░░░░░░░░░░░░░░░░░░░░░] 18%
+       > Initializing core...
+       > Linking shadow protocols...
+       > Awakening system...
     """
+
     terminal_size = get_terminal_size()
     centered_text = center_text(text, terminal_size.columns)
-    
-    for _ in range(3):
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print(f"\033[31m{centered_text}\033[0m")
-        time.sleep(0.5)
-        os.system('cls' if os.name == 'nt' else 'clear')
-        time.sleep(0.5)
 
-def main():
-    os.system('cls' if os.name == 'nt' else 'clear')
-    
-    blinking()
-    
-    os.system('cls' if os.name == 'nt' else 'clear')
+    # verschiedene Pink/Neon Farben
+    colors = [
+        "\033[95m",                 # hell pink
+        "\033[38;2;255;20;147m",   # deep pink
+        "\033[38;2;255;105;180m",  # hot pink
+    ]
+
+    for _ in range(6):
+        for color in colors:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print(f"{color}{centered_text}\033[0m")
+            time.sleep(0.2)
     
     menu = """
              ██████╗  █████╗ ██████╗ ██╗  ██╗    ███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗
