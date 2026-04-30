@@ -2,27 +2,36 @@ import requests
 import os
 import sys
 
-menu = """
-         ▄▄▄█████▓ ██▀███   ▄▄▄       ▄████▄   ██ ▄█▀▓█████  ██▀███
-         ▓  ██▒ ▓▒▓██ ▒ ██▒▒████▄    ▒██▀ ▀█   ██▄█▒ ▓█   ▀ ▓██ ▒ ██▒
-         ▒ ▓██░ ▒░▓██ ░▄█ ▒▒██  ▀█▄  ▒▓█    ▄ ▓███▄░ ▒███   ▓██ ░▄█ ▒
-         ░ ▓██▓ ░ ▒██▀▀█▄  ░██▄▄▄▄██ ▒▓▓▄ ▄██▒▓██ █▄ ▒▓█  ▄ ▒██▀▀█▄
-           ▒██▒ ░ ░██▓ ▒██▒ ▓█   ▓██▒▒ ▓███▀ ░▒██▒ █▄░▒████▒░██▓ ▒██▒
-           ▒ ░░   ░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░ ░▒ ▒  ░▒ ▒▒ ▓▒░░ ▒░ ░░ ▒▓ ░▒▓░
-           ░      ░▒ ░ ▒░  ▒   ▒▒ ░  ░  ▒   ░ ░▒ ▒░ ░ ░  ░  ░▒ ░ ▒░
-           ░         ░░   ░   ░   ▒   ░        ░ ░░ ░    ░     ░░   ░
-                  ░           ░  ░░ ░      ░  ░      ░  ░   ░                                              
+NEON_PINK = "\033[38;2;255;0;180m"
+NEON_CYAN = "\033[38;2;0;255;255m"
+NEON_PURPLE = "\033[38;2;180;0;255m"
+NEON_BLUE = "\033[38;2;80;160;255m"
+NEON_GREEN = "\033[38;2;0;255;120m"
+NEON_RED = "\033[38;2;255;60;60m"
+RESET = "\033[0m"
+
+menu = f"""
+{NEON_CYAN}         ▄▄▄█████▓ ██▀███   ▄▄▄       ▄████▄   ██ ▄█▀▓█████  ██▀███{RESET}
+{NEON_PINK}         ▓  ██▒ ▓▒▓██ ▒ ██▒▒████▄    ▒██▀ ▀█   ██▄█▒ ▓█   ▀ ▓██ ▒ ██▒{RESET}
+{NEON_PURPLE}          ▓██░ ▒░▓██ ░▄█ ▒▒██  ▀█▄  ▒▓█    ▄ ▓███▄░ ▒███   ▓██ ░▄█ ▒{RESET}
+{NEON_BLUE}         ░  ▓██▓ ░ ▒██▀▀█▄  ░██▄▄▄▄██ ▒▓▓▄ ▄██▒▓██ █▄ ▒▓█  ▄ ▒██▀▀█▄{RESET}
+{NEON_GREEN}           ▒██▒ ░ ░██▓ ▒██▒ ▓█   ▓██▒▒ ▓███▀ ░▒██▒ █▄░▒████▒░██▓ ▒██▒{RESET}
+{NEON_CYAN}           ▒ ░░   ░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░ ░▒ ▒  ░▒ ▒▒ ▓▒░░ ▒░ ░░ ▒▓ ░▒▓░{RESET}
+{NEON_PINK}           ░      ░▒ ░ ▒░  ▒   ▒▒ ░  ░  ▒   ░ ░▒ ▒░ ░ ░  ░  ░▒ ░ ▒░{RESET}
+{NEON_PURPLE}           ░         ░░   ░   ░   ▒   ░        ░ ░░ ░    ░     ░░   ░{RESET}
+{NEON_BLUE}                  ░           ░  ░░ ░      ░  ░      ░  ░   ░{RESET}
 """
-menu2 = """
-[0] Back to main
-[1] Username Tracker
+
+menu2 = f"""
+{NEON_CYAN}[0] Back to main{RESET}
+{NEON_PINK}[1] Username Tracker{RESET}
 """
 
 def show_menu():
-    print(f"\033[31m{menu}\033[0m")
-    print(f"\033[31m{menu2}\033[0m")
+    print(menu)
+    print(menu2)
 
-def username(username):
+def username_tracker(username):
     sites = {
         "GitHub": f"https://github.com/{username}",
         "Twitter": f"https://twitter.com/{username}",
@@ -57,38 +66,38 @@ def username(username):
         "CodePen": f"https://codepen.io/{username}",
         "ProductHunt": f"https://www.producthunt.com/@{username}",
     }
-    
-    print(f"\033[31mChecking usernames for '{username}'...\033[0m")
-    
+
+    print(f"{NEON_CYAN}Checking usernames for '{username}'...{RESET}")
+
     for site, url in sites.items():
         try:
             response = requests.get(url, timeout=5)
             if response.status_code == 200:
-                print(f"\033[32m[+] {site}: {url}\033[0m")
+                print(f"{NEON_GREEN}[+] {site}: {url}{RESET}")
             else:
-                print(f"\033[31m[-] {site}: {url}\033[0m")
+                print(f"{NEON_RED}[-] {site}: {url}{RESET}")
         except requests.RequestException:
-            print(f"\033[31m[-] {site}: {url}\033[0m")
+            print(f"{NEON_RED}[-] {site}: {url}{RESET}")
 
 def main():
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
         show_menu()
         try:
-            choice = int(input('\033[31mChoice >> \033[0m'))
+            choice = int(input(f'{NEON_RED}Choice >> {RESET}'))
             if choice == 0:
                 os.system('python cyb3rtech.py')
                 break
             elif choice == 1:
-                user = input('\033[31mPseudo >> \033[0m')
+                user = input(f'{NEON_RED}Pseudo >> {RESET}')
                 os.system('cls' if os.name == 'nt' else 'clear')
-                print(f"\033[31m{menu}\033[0m")
-                username(user)
+                print(menu)
+                username_tracker(user)
             else:
-                print("\033[31m[!]\033[0m Invalid choice \033[31m[!]\033[0m")
+                print(f"{NEON_RED}[!]{RESET} Invalid choice {NEON_RED}[!]{RESET}")
         except ValueError:
-            print("\033[31mPlease enter a valid number\033[0m")
-        input("\nPress Enter to return to the menu...\033[0m")
+            print(f"{NEON_RED}Please enter a valid number{RESET}")
+        input(f"\n{NEON_CYAN}Press Enter to return to the menu...{RESET}")
 
 if __name__ == "__main__":
     main()
