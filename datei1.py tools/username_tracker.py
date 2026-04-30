@@ -1,94 +1,54 @@
-import requests
 import os
-import sys
 
-menu = """
-         ▄▄▄█████▓ ██▀███   ▄▄▄       ▄████▄   ██ ▄█▀▓█████  ██▀███
-         ▓  ██▒ ▓▒▓██ ▒ ██▒▒████▄    ▒██▀ ▀█   ██▄█▒ ▓█   ▀ ▓██ ▒ ██▒
-         ▒ ▓██░ ▒░▓██ ░▄█ ▒▒██  ▀█▄  ▒▓█    ▄ ▓███▄░ ▒███   ▓██ ░▄█ ▒
-         ░ ▓██▓ ░ ▒██▀▀█▄  ░██▄▄▄▄██ ▒▓▓▄ ▄██▒▓██ █▄ ▒▓█  ▄ ▒██▀▀█▄
-           ▒██▒ ░ ░██▓ ▒██▒ ▓█   ▓██▒▒ ▓███▀ ░▒██▒ █▄░▒████▒░██▓ ▒██▒
-           ▒ ░░   ░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░ ░▒ ▒  ░▒ ▒▒ ▓▒░░ ▒░ ░░ ▒▓ ░▒▓░
-           ░      ░▒ ░ ▒░  ▒   ▒▒ ░  ░  ▒   ░ ░▒ ▒░ ░ ░  ░  ░▒ ░ ▒░
-           ░         ░░   ░   ░   ▒   ░        ░ ░░ ░    ░     ░░   ░
-                  ░           ░  ░░ ░      ░  ░      ░  ░   ░                                              
+NEON_PINK = "\033[38;2;255;0;180m"
+NEON_CYAN = "\033[38;2;0;255;255m"
+NEON_PURPLE = "\033[38;2;180;0;255m"
+NEON_BLUE = "\033[38;2;80;160;255m"
+NEON_GREEN = "\033[38;2;0;255;120m"
+NEON_RED = "\033[38;2;255;60;60m"
+RESET = "\033[0m"
+
+def load_config(filename):
+    config = {}
+    try:
+        with open(filename, 'r', encoding='utf-8') as f:
+            for line in f:
+                if "=" in line:
+                    key, value = line.strip().split("=", 1)
+                    config[key.strip()] = value.strip()
+    except FileNotFoundError:
+        config["error"] = "config.txt not found"
+    return config
+
+config = load_config('config.txt')
+
+menu = f"""
+{NEON_CYAN}         ▄▄▄█████▓ ▒█████   ▒█████   ██▓        ██▓ ███▄    █   █████▒▒█████{RESET}
+{NEON_PINK}         ▓  ██▒ ▓▒▒██▒  ██▒▒██▒  ██▒▓██▒       ▓██▒ ██ ▀█   █ ▓██   ▒▒██▒  ██▒{RESET}
+{NEON_PURPLE}         ▒ ▓██░ ▒░▒██░  ██▒▒██░  ██▒▒██░       ▒██▒▓██  ▀█ ██▒▒████ ░▒██░  ██▒{RESET}
+{NEON_BLUE}         ░ ▓██▓ ░ ▒██   ██░▒██   ██░▒██░       ░██░▓██▒  ▐▌██▒░▓█▒  ░▒██   ██░{RESET}
+{NEON_GREEN}           ▒██▒ ░ ░ ████▓▒░░ ████▓▒░░██████▒   ░██░▒██░   ▓██░░▒█░   ░ ████▓▒░{RESET}
+{NEON_CYAN}           ▒ ░░   ░ ▒░▒░▒░ ░ ▒░▒░▒░ ░ ▒░▓  ░   ░▓  ░ ▒░   ▒ ▒  ▒ ░   ░ ▒░▒░▒░{RESET}
+{NEON_PINK}             ░      ░ ▒ ▒░   ░ ▒ ▒░ ░ ░ ▒  ░    ▒ ░░ ░░   ░ ▒░ ░       ░ ▒ ▒░{RESET}
+{NEON_PURPLE}            ░      ░ ░ ░ ▒  ░ ░ ░ ▒    ░ ░       ▒ ░   ░   ░ ░  ░ ░   ░ ░ ░ ▒{RESET}
+{NEON_BLUE}                     ░ ░      ░ ░      ░  ░    ░           ░            ░ ░{RESET}
 """
-menu2 = """
-[0] Back to main
-[1] Username Tracker
+
+menu2 = f"""
+{NEON_PINK}> Tool Name     : {NEON_CYAN}DARK NEXUS{RESET}
+{NEON_PINK}> Version       : {NEON_CYAN}BETA{RESET}
+{NEON_PINK}> Creator       : {NEON_CYAN}JUSTNUTELABROT{RESET}
+{NEON_PINK}> Coding        : {NEON_CYAN}PRIVST{RESET}
+{NEON_PINK}> Discord [W]   : {NEON_CYAN}JUSTNUTELLABROT{RESET}
+{NEON_PINK}> GitHub [W]    : {NEON_CYAN}MUSIMITAJA{RESET}
 """
 
 def show_menu():
-    print(f"\033[31m{menu}\033[0m")
-    print(f"\033[31m{menu2}\033[0m")
-
-def username(username):
-    sites = {
-        "GitHub": f"https://github.com/{username}",
-        "Twitter": f"https://twitter.com/{username}",
-        "Instagram": f"https://www.instagram.com/{username}/",
-        "Reddit": f"https://www.reddit.com/user/{username}",
-        "Facebook": f"https://www.facebook.com/{username}",
-        "LinkedIn": f"https://www.linkedin.com/in/{username}",
-        "Pinterest": f"https://www.pinterest.com/{username}",
-        "Tumblr": f"https://{username}.tumblr.com",
-        "YouTube": f"https://www.youtube.com/{username}",
-        "Twitch": f"https://www.twitch.tv/{username}",
-        "SoundCloud": f"https://soundcloud.com/{username}",
-        "Steam": f"https://steamcommunity.com/id/{username}",
-        "DeviantArt": f"https://www.deviantart.com/{username}",
-        "Patreon": f"https://www.patreon.com/{username}",
-        "WordPress": f"https://{username}.wordpress.com",
-        "Spotify": f"https://open.spotify.com/user/{username}",
-        "GitLab": f"https://gitlab.com/{username}",
-        "Mixcloud": f"https://www.mixcloud.com/{username}",
-        "PayPal": f"https://www.paypal.me/{username}",
-        "TikTok": f"https://www.tiktok.com/@{username}",
-        "Snapchat": f"https://www.snapchat.com/add/{username}",
-        "Guns.lol": f"https://guns.lol/{username}",
-        "Flickr": f"https://www.flickr.com/photos/{username}",
-        "Vimeo": f"https://vimeo.com/{username}",
-        "Discord": f"https://discord.com/users/{username}",
-        "HackerOne": f"https://hackerone.com/{username}",
-        "RedBubble": f"https://www.redbubble.com/people/{username}",
-        "Medium": f"https://medium.com/@{username}",
-        "Dribbble": f"https://dribbble.com/{username}",
-        "Behance": f"https://www.behance.net/{username}",
-        "CodePen": f"https://codepen.io/{username}",
-        "ProductHunt": f"https://www.producthunt.com/@{username}",
-    }
-    
-    print(f"\033[31mChecking usernames for '{username}'...\033[0m")
-    
-    for site, url in sites.items():
-        try:
-            response = requests.get(url, timeout=5)
-            if response.status_code == 200:
-                print(f"\033[32m[+] {site}: {url}\033[0m")
-            else:
-                print(f"\033[31m[-] {site}: {url}\033[0m")
-        except requests.RequestException:
-            print(f"\033[31m[-] {site}: {url}\033[0m")
-
-def main():
-    while True:
-        os.system('cls' if os.name == 'nt' else 'clear')
-        show_menu()
-        try:
-            choice = int(input('\033[31mChoice >> \033[0m'))
-            if choice == 0:
-                os.system('python cyb3rtech.py')
-                break
-            elif choice == 1:
-                user = input('\033[31mPseudo >> \033[0m')
-                os.system('cls' if os.name == 'nt' else 'clear')
-                print(f"\033[31m{menu}\033[0m")
-                username(user)
-            else:
-                print("\033[31m[!]\033[0m Invalid choice \033[31m[!]\033[0m")
-        except ValueError:
-            print("\033[31mPlease enter a valid number\033[0m")
-        input("\nPress Enter to return to the menu...\033[0m")
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print(menu)
+    print(menu2)
 
 if __name__ == "__main__":
-    main()
+    show_menu()
+    input(f"\n{NEON_CYAN}Press Enter to return to the main menu...{RESET}")
+    os.system('python cyb3rtech.py')
