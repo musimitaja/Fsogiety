@@ -1,4 +1,5 @@
 import os
+import time
 
 NEON_PINK = "\033[38;2;255;0;180m"
 NEON_CYAN = "\033[38;2;0;255;255m"
@@ -11,9 +12,9 @@ RESET = "\033[0m"
 menu = f"""
 {NEON_CYAN}         ██▀███   ▄▄▄       ██▓▓█████▄{RESET}
 {NEON_PINK}         ▓██ ▒ ██▒▒████▄    ▓██▒▒██▀ ██▌{RESET}
-{NEON_PURPLE}       ▓██ ░▄█ ▒▒██  ▀█▄  ▒██▒░██   █▌{RESET}
+{NEON_PURPLE}         ▓██ ░▄█ ▒▒██  ▀█▄  ▒██▒░██   █▌{RESET}
 {NEON_BLUE}         ▒██▀▀█▄  ░██▄▄▄▄██ ░██░░▓█▄   ▌{RESET}
-{NEON_GREEN}        ░██▓ ▒██▒ ▓█   ▓██▒░██░░▒████▓{RESET}
+{NEON_GREEN}         ░██▓ ▒██▒ ▓█   ▓██▒░██░░▒████▓{RESET}
 {NEON_CYAN}         ░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░▓   ▒▒▓  ▒{RESET}
 {NEON_PINK}           ░▒ ░ ▒░  ▒   ▒▒ ░ ▒ ░ ░ ▒  ▒{RESET}
 {NEON_PURPLE}           ░░   ░   ░   ▒    ▒ ░ ░ ░  ░{RESET}
@@ -23,32 +24,28 @@ menu = f"""
 
 menu2 = f"""
 {NEON_CYAN}[0] Back to main{RESET}
-{NEON_PINK}[1] Bot Raid #(BEST){RESET}
-{NEON_PURPLE}[2] SelfBot Raid{RESET}
+{NEON_PINK}[1] Option 1{RESET}
+{NEON_PURPLE}[2] Option 2{RESET}
 """
 
 def show_menu():
+    os.system('cls' if os.name == 'nt' else 'clear')
     print(menu)
     print(menu2)
 
 def main():
     while True:
-        os.system('cls' if os.name == 'nt' else 'clear')
         show_menu()
         try:
-            choice = int(input(f'{NEON_RED}Choice >> {RESET}'))
+            choice = int(input(f"{NEON_RED}Choice >> {RESET}"))
             if choice == 0:
-                os.system('python cyb3rtech.py')
                 break
-            elif choice == 1:
-                os.system('python ./tools/bot_raid.py')
-            elif choice == 2:
-                os.system('python ./tools/self_raid.py')
             else:
-                print(f"{NEON_RED}[!]{RESET} Invalid choice {NEON_RED}[!]{RESET}")
+                print(f"{NEON_RED}This option is disabled in the safe version.{RESET}")
+                time.sleep(1)
         except ValueError:
             print(f"{NEON_RED}Please enter a valid number{RESET}")
-        input(f"\n{NEON_CYAN}Press Enter to return to the menu...{RESET}")
+            time.sleep(1)
 
 if __name__ == "__main__":
     main()
