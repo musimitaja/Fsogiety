@@ -1,45 +1,54 @@
 import os
 
-menu = """
-         ██▀███   ▄▄▄       ██▓▓█████▄
-         ▓██ ▒ ██▒▒████▄    ▓██▒▒██▀ ██▌
-         ▓██ ░▄█ ▒▒██  ▀█▄  ▒██▒░██   █▌
-         ▒██▀▀█▄  ░██▄▄▄▄██ ░██░░▓█▄   ▌
-         ░██▓ ▒██▒ ▓█   ▓██▒░██░░▒████▓
-         ░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░▓   ▒▒▓  ▒
-           ░▒ ░ ▒░  ▒   ▒▒ ░ ▒ ░ ░ ▒  ▒
-           ░░   ░   ░   ▒    ▒ ░ ░ ░  ░
-               ░           ░  ░ ░     ░
-                        ░
+NEON_PINK = "\033[38;2;255;0;180m"
+NEON_CYAN = "\033[38;2;0;255;255m"
+NEON_PURPLE = "\033[38;2;180;0;255m"
+NEON_BLUE = "\033[38;2;80;160;255m"
+NEON_GREEN = "\033[38;2;0;255;120m"
+NEON_RED = "\033[38;2;255;60;60m"
+RESET = "\033[0m"
+
+menu = f"""
+{NEON_CYAN}         ██▀███   ▄▄▄       ██▓▓█████▄{RESET}
+{NEON_PINK}         ▓██ ▒ ██▒▒████▄    ▓██▒▒██▀ ██▌{RESET}
+{NEON_PURPLE}       ▓██ ░▄█ ▒▒██  ▀█▄  ▒██▒░██   █▌{RESET}
+{NEON_BLUE}         ▒██▀▀█▄  ░██▄▄▄▄██ ░██░░▓█▄   ▌{RESET}
+{NEON_GREEN}        ░██▓ ▒██▒ ▓█   ▓██▒░██░░▒████▓{RESET}
+{NEON_CYAN}         ░ ▒▓ ░▒▓░ ▒▒   ▓▒█░░▓   ▒▒▓  ▒{RESET}
+{NEON_PINK}           ░▒ ░ ▒░  ▒   ▒▒ ░ ▒ ░ ░ ▒  ▒{RESET}
+{NEON_PURPLE}           ░░   ░   ░   ▒    ▒ ░ ░ ░  ░{RESET}
+{NEON_BLUE}               ░           ░  ░ ░     ░{RESET}
+{NEON_GREEN}                        ░{RESET}
 """
-menu2 = """
-[0] Back to main
-[1] Bot Raid #(BEST)
-[2] SelfBot Raid
+
+menu2 = f"""
+{NEON_CYAN}[0] Back to main{RESET}
+{NEON_PINK}[1] Bot Raid #(BEST){RESET}
+{NEON_PURPLE}[2] SelfBot Raid{RESET}
 """
 
 def show_menu():
-    print(f"\033[31m{menu}")
-    print(f"\033[31m{menu2}\033[0m")
-    
+    print(menu)
+    print(menu2)
+
 def main():
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
         show_menu()
         try:
-            choice = int(input('\033[31mChoice >> \033[0m'))
+            choice = int(input(f'{NEON_RED}Choice >> {RESET}'))
             if choice == 0:
                 os.system('python cyb3rtech.py')
                 break
             elif choice == 1:
                 os.system('python ./tools/bot_raid.py')
             elif choice == 2:
-                os.system('python ./tools/self_raid.py')                
+                os.system('python ./tools/self_raid.py')
             else:
-                print("\033[31m[!]\033[0m Invalid choice \033[31m[!]\033[0m")
+                print(f"{NEON_RED}[!]{RESET} Invalid choice {NEON_RED}[!]{RESET}")
         except ValueError:
-            print("\033[31mPlease enter a valid number\033[0m")
-        input("\nPress Enter to return to the menu...\033[0m")
+            print(f"{NEON_RED}Please enter a valid number{RESET}")
+        input(f"\n{NEON_CYAN}Press Enter to return to the menu...{RESET}")
 
 if __name__ == "__main__":
     main()
