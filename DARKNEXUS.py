@@ -15,8 +15,7 @@ def get_terminal_size():
 
 def center_text(text, width):
     lines = text.splitlines()
-    centered_lines = [line.center(width) for line in lines]
-    return "\n".join(centered_lines)
+    return "\n".join(line.center(width) for line in lines)
 
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -38,7 +37,6 @@ def blinking():
 
     terminal_size = get_terminal_size()
     centered_text = center_text(text, terminal_size.columns)
-
     colors = [NEON_PINK, NEON_CYAN, NEON_PURPLE, NEON_GREEN, NEON_BLUE]
 
     for _ in range(4):
@@ -102,7 +100,7 @@ def main():
 {NEON_CYAN}             ██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝    ████╗  ██║██╔════╝╚██╗██╔╝██║   ██║███████╗{RESET}
 {NEON_PURPLE}           ██║  ██║███████║██████╔╝█████╔╝     ██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗{RESET}
 {NEON_BLUE}             ██║  ██║██╔══██║██╔══██╗██╔═██╗     ██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║{RESET}
-{NEON_GREEN}            ██████╔╝██║  ██║██║  ██║██║  ██╗    ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║{RESET}
+{NEON_GREEN}             ██████╔╝██║  ██║██║  ██║██║  ██╗    ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║{RESET}
 {NEON_PINK}             ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝{RESET}
 {NEON_CYAN}                          ░                          ░ ░ {RESET}
 {NEON_PURPLE}                                    By Justnutellabrot {RESET}
@@ -110,7 +108,7 @@ def main():
 {NEON_GREEN}                                             ║{RESET}
 {NEON_PINK}                                             ║{RESET}
 {NEON_CYAN}      ╔══════════════════════════════════════════════════════════════════════════════════╗{RESET}
-{NEON_PURPLE}    ║ Dark Nexus | Beta | [0] > Support (discord)                      [ - ] [ □ ] [ X ║{RESET}
+{NEON_PURPLE}    ║ Dark Nexus | Beta | [0] > Support (discord)                    [ - ] [ □ ] [ X ] ║{RESET}
 {NEON_BLUE}      ║══════════════════════════════════════════════════════════════════════════════════║{RESET}
 {NEON_GREEN}     ║                                                                                  ║{RESET}
 {NEON_PINK}      ║ [1] > Tool Info                 [11] > Discord Token Info                        ║{RESET}
@@ -120,7 +118,7 @@ def main():
 {NEON_GREEN}     ║ [5] > Phone Number Lookup        [15] > N/A                                      ║{RESET}
 {NEON_PINK}      ║ [6] > Mail Info                  [16] > Discord Token Generator                  ║{RESET}
 {NEON_CYAN}      ║ [7] > Username Tracker           [17] > Discord Nitro Generator                  ║{RESET}
-{NEON_PURPLE     ║ [8] > SQL Vulnerability          [18] > Discord Server Info                      ║{RESET}
+{NEON_PURPLE}    ║ [8] > SQL Vulnerability          [18] > Discord Server Info                      ║{RESET}
 {NEON_BLUE}      ║ [9] > Discord Raid               [19] > Web Cloner (#soon)                       ║{RESET}
 {NEON_GREEN}     ║ [10] > Dmall                     [20] > Next Page (1/2) (#soon)                  ║{RESET}
 {NEON_PINK}      ║                                                                                  ║{RESET}
@@ -130,7 +128,6 @@ def main():
     while True:
         clear()
         print(menu)
-
         try:
             choice = int(input(f"{NEON_PINK}Choice >> {RESET}"))
             run_choice(choice)
