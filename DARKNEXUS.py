@@ -13,7 +13,7 @@ def center_text(text, width):
 def blinking():
     text = """
 ██████╗  █████╗ ██████╗ ██╗  ██╗    ███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗
-██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝    ████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██╔════╝
+██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝    ████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██████╔╝
 ██║  ██║███████║██████╔╝█████╔╝     ██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗
 ██║  ██║██╔══██║██╔══██╗██╔═██╗     ██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║
 ██████╔╝██║  ██║██║  ██║██║  ██╗    ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║
@@ -24,7 +24,6 @@ def blinking():
 > Linking shadow protocols...
 > Awakening system...
 """
-
     terminal_size = get_terminal_size()
     centered_text = center_text(text, terminal_size.columns)
 
@@ -40,10 +39,59 @@ def blinking():
             print(f"{color}{centered_text}\033[0m")
             time.sleep(0.2)
 
-blinking()
+def run_choice(choice):
+    if choice == 0:
+        os.system('python ./tools/discord.py')
+    elif choice == 1:
+        os.system('python ./tools/tool_info.py')
+    elif choice == 2:
+        os.system('python ./tools/geoip.py')
+    elif choice == 3:
+        os.system('python ./cyb3rtech.py')
+    elif choice == 4:
+        os.system('python ./cyb3rtech.py')
+    elif choice == 5:
+        os.system('python ./tools/phone_number.py')
+    elif choice == 6:
+        os.system('python ./tools/mail_info.py')
+    elif choice == 7:
+        os.system('python ./tools/username_tracker.py')
+    elif choice == 8:
+        os.system('python ./tools/sql_vulnerability.py')
+    elif choice == 9:
+        os.system('python ./tools/discord_raid.py')
+    elif choice == 10:
+        os.system('python ./tools/dmall.py')
+    elif choice == 11:
+        os.system('python ./tools/discord_token_info.py')
+    elif choice == 12:
+        os.system('python ./tools/discord_token_nuker.py')
+    elif choice == 13:
+        os.system('python ./tools/discord_token_joiner.py')
+    elif choice == 14:
+        os.system('python ./tools/discord_token_bruteforce.py')
+    elif choice == 15:
+        os.system('python ./cyb3rtech.py')
+    elif choice == 16:
+        os.system('python ./cyb3rtech.py')
+    elif choice == 17:
+        os.system('python ./tools/discord_nitro_generator.py')
+    elif choice == 18:
+        os.system('python ./cyb3rtech.py')
+    elif choice == 19:
+        os.system('python ./tools/web_cloner.py')
+    elif choice == 20:
+        os.system('python ./nextpage.py')
+    else:
+        print("\033[31m[!] >\033[0m Invalid choice < [!]")
+        time.sleep(2)
+
+def main():
+    blinking()
+
     menu = """
              ██████╗  █████╗ ██████╗ ██╗  ██╗    ███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗
-             ██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝    ████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██╔════╝
+             ██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝    ████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██████╔╝
              ██║  ██║███████║██████╔╝█████╔╝     ██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗
              ██║  ██║██╔══██║██╔══██╗██╔═██╗     ██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║
              ██████╔╝██║  ██║██║  ██║██║  ██╗    ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║
@@ -54,7 +102,7 @@ blinking()
                                              ║
                                              ║
       ╔══════════════════════════════════════════════════════════════════════════════════╗
-      ║ Dark Nexus | Beta | [0] > Support (discord)                     [ - ] [ □ ] [ X ]  ║
+      ║ Dark Nexus | Beta | [0] > Support (discord)                   [ - ] [ □ ] [ X ]  ║
       ║══════════════════════════════════════════════════════════════════════════════════║
       ║                                                                                  ║
       ║ [1] > Tool Info                 [11] > Discord Token Info                        ║
@@ -69,64 +117,19 @@ blinking()
       ║ [10] > Dmall                    [20] > Next Page (1/2) (#soon)                   ║
       ║                                                                                  ║
       ╚══════════════════════════════════════════════════════════════════════════════════╝
-   """
-    
+    """
+
     while True:
-        print(f"\033[31m{menu}")
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print(f"\033[31m{menu}\033[0m")
 
         try:
             choice = int(input('Choice >> '))
-            def choice_script(choice):
-                if choice == 0:
-                    os.system('python ./tools/discord.py')
-                elif choice == 1:
-                    os.system('python ./tools/tool_info.py')
-                elif choice == 2:
-                    os.system('python ./tools/geoip.py')
-                elif choice == 3:
-                    os.system('python ./cyb3rtech.py')
-                elif choice == 4:
-                    os.system('python ./cyb3rtech.py')
-                elif choice == 5:
-                    os.system('python ./tools/phone_number.py')
-                elif choice == 6:
-                    os.system('python ./tools/mail_info.py')
-                elif choice == 7:
-                    os.system('python ./tools/username_tracker.py')
-                elif choice == 8:
-                    os.system('python ./tools/sql_vulnerability.py')
-                elif choice == 9:
-                    os.system('python ./tools/discord_raid.py')
-                elif choice == 10:
-                    os.system('python ./tools/dmall.py')
-                elif choice == 11:
-                    os.system('python ./tools/discord_token_info.py')
-                elif choice == 12:
-                    os.system('python ./tools/discord_token_nuker.py')
-                elif choice == 13:
-                    os.system('python ./tools/discord_token_joiner.py')
-                elif choice == 14:
-                    os.system('python ./tools/discord_token_bruteforce.py')
-                elif choice == 15:
-                    os.system('python ./cyb3rtech.py')
-                elif choice == 16:
-                    os.system('python ./cyb3rtech.py')
-                elif choice == 17:
-                    os.system('python ./tools/discord_nitro_generator.py')
-                elif choice == 18:
-                    os.system('python ./cyb3rtech.py')
-                elif choice == 19:
-                    os.system('python ./tools/web_cloner.py')
-                elif choice == 20:
-                    os.system('python ./nextpage.py')
-                else:
-                    raise ValueError
-            choice_script(choice)
-            break
+            run_choice(choice)
+            time.sleep(1)
         except ValueError:
-            print("\033[31m[!] >\033[0m Invalid choice \033[31m< [!]\033[0m")
+            print("\033[31m[!] >\033[0m Invalid choice < [!]")
             time.sleep(2)
-            os.system('cls' if os.name == 'nt' else 'clear')
 
 if __name__ == "__main__":
     main()
