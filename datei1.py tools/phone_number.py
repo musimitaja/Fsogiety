@@ -4,34 +4,43 @@ import sys
 import time
 import os
 
-menu = """
-         ███▄    █  █    ██  ███▄ ▄███▓ ▄▄▄▄   ▓█████  ██▀███
-         ██ ▀█   █  ██  ▓██▒▓██▒▀█▀ ██▒▓█████▄ ▓█   ▀ ▓██ ▒ ██▒
-         ▓██  ▀█ ██▒▓██  ▒██░▓██    ▓██░▒██▒ ▄██▒███   ▓██ ░▄█ ▒
-         ▓██▒  ▐▌██▒▓▓█  ░██░▒██    ▒██ ▒██░█▀  ▒▓█  ▄ ▒██▀▀█▄
-         ▒██░   ▓██░▒▒█████▓ ▒██▒   ░██▒░▓█  ▀█▓░▒████▒░██▓ ▒██▒
-         ░ ▒░   ▒ ▒ ░▒▓▒ ▒ ▒ ░ ▒░   ░  ░░▒▓███▀▒░░ ▒░ ░░ ▒▓ ░▒▓░
-         ░ ░░   ░ ▒░░░▒░ ░ ░ ░  ░      ░▒░▒   ░  ░ ░  ░  ░▒ ░ ▒░
-         ░   ░ ░  ░░░ ░ ░ ░      ░    ░    ░    ░     ░░   ░
-             ░    ░            ░    ░         ░  ░   ░                                                                         ░
+NEON_PINK = "\033[38;2;255;0;180m"
+NEON_CYAN = "\033[38;2;0;255;255m"
+NEON_PURPLE = "\033[38;2;180;0;255m"
+NEON_BLUE = "\033[38;2;80;160;255m"
+NEON_GREEN = "\033[38;2;0;255;120m"
+NEON_RED = "\033[38;2;255;60;60m"
+RESET = "\033[0m"
+
+menu = f"""
+{NEON_CYAN}         ███▄    █  █    ██  ███▄ ▄███▓ ▄▄▄▄   ▓█████  ██▀███{RESET}
+{NEON_PINK}         ██ ▀█   █  ██  ▓██▒▓██▒▀█▀ ██▒▓█████▄ ▓█   ▀ ▓██ ▒ ██▒{RESET}
+{NEON_PURPLE}         ▓██  ▀█ ██▒▓██  ▒██░▓██    ▓██░▒██▒ ▄██▒███   ▓██ ░▄█ ▒{RESET}
+{NEON_BLUE}         ▓██▒  ▐▌██▒▓▓█  ░██░▒██    ▒██ ▒██░█▀  ▒▓█  ▄ ▒██▀▀█▄{RESET}
+{NEON_GREEN}         ▒██░   ▓██░▒▒█████▓ ▒██▒   ░██▒░▓█  ▀█▓░▒████▒░██▓ ▒██▒{RESET}
+{NEON_CYAN}         ░ ▒░   ▒ ▒ ░▒▓▒ ▒ ▒ ░ ▒░   ░  ░░▒▓███▀▒░░ ▒░ ░░ ▒▓ ░▒▓░{RESET}
+{NEON_PINK}         ░ ░░   ░ ▒░░░▒░ ░ ░ ░  ░      ░▒░▒   ░  ░ ░  ░  ░▒ ░ ▒░{RESET}
+{NEON_PURPLE}         ░   ░ ░  ░░░ ░ ░ ░      ░    ░    ░    ░     ░░   ░{RESET}
+{NEON_BLUE}             ░    ░            ░    ░         ░  ░   ░{RESET}
 """
-menu2 = """
-[0] Back to main
-[1] Phone Number Tracker
+
+menu2 = f"""
+{NEON_CYAN}[0] Back to main{RESET}
+{NEON_PINK}[1] Phone Number Tracker{RESET}
 """
 
 def show_menu():
-    print(f"\033[31m{menu}\033[0m")
-    print(f"\033[31m{menu2}\033[0m")
+    print(menu)
+    print(menu2)
 
 def track_phone_number(phone_number):
     phone_number = ''.join(filter(str.isdigit, phone_number))
     try:
         parsed_number = phonenumbers.parse(f"+{phone_number}", None)
         if not phonenumbers.is_valid_number(parsed_number):
-            print("\033[31m[!] Invalid phone number format [!]\033[0m")
+            print(f"{NEON_RED}[!] Invalid phone number format [!]{RESET}")
             return
-        
+
         number_info = {
             "Country": geocoder.description_for_number(parsed_number, 'en'),
             "ISP": carrier.name_for_number(parsed_number, 'en'),
@@ -42,34 +51,34 @@ def track_phone_number(phone_number):
             "Number Type": phonenumbers.number_type(parsed_number),
             "Possible Number": phonenumbers.is_possible_number(parsed_number)
         }
-        
-        print(f"\033[31mRecherche pour le numéro '+{phone_number}'..\n\033[0m")
+
+        print(f"{NEON_RED}Recherche pour le numéro '+{phone_number}'..{RESET}")
         time.sleep(2)
         for key, value in number_info.items():
-            print(f"\033[31m{key}: {value}\033[0m")
-    
+            print(f"{NEON_CYAN}{key}: {NEON_PINK}{value}{RESET}")
+
     except phonenumbers.NumberParseException:
-        print("\033[31m[!] Failed to parse phone number [!]\033[0m")
+        print(f"{NEON_RED}[!] Failed to parse phone number [!]{RESET}")
 
 def main():
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
         show_menu()
         try:
-            choice = int(input('\033[31mChoice >> \033[0m'))
+            choice = int(input(f'{NEON_RED}Choice >> {RESET}'))
             if choice == 0:
                 os.system('python cyb3rtech.py')
                 break
             elif choice == 1:
-                phone_number = input('\033[31mPhone Number >> \033[0m')
+                phone_number = input(f'{NEON_RED}Phone Number >> {RESET}')
                 os.system('cls' if os.name == 'nt' else 'clear')
-                print(f"\033[31m{menu}\033[0m")
+                print(menu)
                 track_phone_number(phone_number)
             else:
-                print("\033[31m[!]\033[0m Invalid choice \033[31m[!]\033[0m")
+                print(f"{NEON_RED}[!]{RESET} Invalid choice {NEON_RED}[!]{RESET}")
         except ValueError:
-            print("\033[31mPlease enter a valid number\033[0m")
-        input("\nPress Enter to return to the menu...\033[0m")
+            print(f"{NEON_RED}Please enter a valid number{RESET}")
+        input(f"\n{NEON_CYAN}Press Enter to return to the menu...{RESET}")
 
 if __name__ == "__main__":
     main()
