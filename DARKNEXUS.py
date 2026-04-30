@@ -23,14 +23,14 @@ def clear():
 
 def blinking():
     text = f"""
-{NEON_PINK}██████╗  █████╗ ██████╗ ██╗  ██╗    ███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗{RESET}
-{NEON_CYAN}██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝    ████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██████╔╝{RESET}
+{NEON_PINK}  ██████╗  █████╗ ██████╗ ██╗  ██╗    ███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗{RESET}
+{NEON_CYAN}  ██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝    ████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██████╔╝{RESET}
 {NEON_PURPLE}██║  ██║███████║██████╔╝█████╔╝     ██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗{RESET}
-{NEON_BLUE}██║  ██║██╔══██║██╔══██╗██╔═██╗     ██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║{RESET}
-{NEON_GREEN}██████╔╝██║  ██║██║  ██║██║  ██╗    ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║{RESET}
-{NEON_PINK}╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝{RESET}
+{NEON_BLUE}  ██║  ██║██╔══██║██╔══██╗██╔═██╗     ██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║{RESET}
+{NEON_GREEN} ██████╔╝██║  ██║██║  ██║██║  ██╗    ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║{RESET}
+{NEON_PINK}  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝{RESET}
 
-{NEON_CYAN}[██████░░░░░░░░░░░░░░░░░░░░░░░░░░] 18%{RESET}
+{NEON_CYAN}  [██████░░░░░░░░░░░░░░░░░░░░░░░░░░] 18%{RESET}
 {NEON_PURPLE}> Initializing core...{RESET}
 {NEON_BLUE}> Linking shadow protocols...{RESET}
 {NEON_GREEN}> Awakening system...{RESET}
@@ -100,9 +100,9 @@ def main():
     menu = f"""
 {NEON_PINK}             ██████╗  █████╗ ██████╗ ██╗  ██╗    ███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗{RESET}
 {NEON_CYAN}             ██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝    ████╗  ██║██╔════╝╚██╗██╔╝██║   ██║███████╗{RESET}
-{NEON_PURPLE}             ██║  ██║███████║██████╔╝█████╔╝     ██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗{RESET}
+{NEON_PURPLE}           ██║  ██║███████║██████╔╝█████╔╝     ██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗{RESET}
 {NEON_BLUE}             ██║  ██║██╔══██║██╔══██╗██╔═██╗     ██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║{RESET}
-{NEON_GREEN}             ██████╔╝██║  ██║██║  ██║██║  ██╗    ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║{RESET}
+{NEON_GREEN}            ██████╔╝██║  ██║██║  ██║██║  ██╗    ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║{RESET}
 {NEON_PINK}             ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝{RESET}
 {NEON_CYAN}                          ░                          ░ ░ {RESET}
 {NEON_PURPLE}                                    By Justnutellabrot {RESET}
@@ -110,19 +110,19 @@ def main():
 {NEON_GREEN}                                             ║{RESET}
 {NEON_PINK}                                             ║{RESET}
 {NEON_CYAN}      ╔══════════════════════════════════════════════════════════════════════════════════╗{RESET}
-{NEON_PURPLE}      ║ Dark Nexus | Beta | [0] > Support (discord)                     [ - ] [ □ ] [ X ]  ║{RESET}
+{NEON_PURPLE}    ║ Dark Nexus | Beta | [0] > Support (discord)                      [ - ] [ □ ] [ X ]  ║{RESET}
 {NEON_BLUE}      ║══════════════════════════════════════════════════════════════════════════════════║{RESET}
-{NEON_GREEN}      ║                                                                                  ║{RESET}
+{NEON_GREEN}     ║                                                                                 ║{RESET}
 {NEON_PINK}      ║ [1] > Tool Info                 [11] > Discord Token Info                        ║{RESET}
 {NEON_CYAN}      ║ [2] > IP Info                   [12] > Discord Token Nuker                       ║{RESET}
-{NEON_PURPLE}      ║ [3] > DDOS (#soon)              [13] > Discord Token Joiner                      ║{RESET}
-{NEON_BLUE}      ║ [4] > Mass Report (#soon)        [14] > Discord Token BruteForce                  ║{RESET}
-{NEON_GREEN}      ║ [5] > Phone Number Lookup        [15] > N/A                                       ║{RESET}
-{NEON_PINK}      ║ [6] > Mail Info                  [16] > Discord Token Generator                   ║{RESET}
-{NEON_CYAN}      ║ [7] > Username Tracker           [17] > Discord Nitro Generator                   ║{RESET}
-{NEON_PURPLE}      ║ [8] > SQL Vulnerability          [18] > Discord Server Info                       ║{RESET}
-{NEON_BLUE}      ║ [9] > Discord Raid               [19] > Web Cloner (#soon)                        ║{RESET}
-{NEON_GREEN}      ║ [10] > Dmall                     [20] > Next Page (1/2) (#soon)                   ║{RESET}
+{NEON_PURPLE}    ║ [3] > DDOS (#soon)              [13] > Discord Token Joiner                    ║{RESET}
+{NEON_BLUE}      ║ [4] > Mass Report (#soon)        [14] > Discord Token BruteForce                 ║{RESET}
+{NEON_GREEN}     ║ [5] > Phone Number Lookup        [15] > N/A                                     ║{RESET}
+{NEON_PINK}      ║ [6] > Mail Info                  [16] > Discord Token Generator                  ║{RESET}
+{NEON_CYAN}      ║ [7] > Username Tracker           [17] > Discord Nitro Generator                  ║{RESET}
+{NEON_PURPLE     ║ [8] > SQL Vulnerability          [18] > Discord Server Info                    ║{RESET}
+{NEON_BLUE}      ║ [9] > Discord Raid               [19] > Web Cloner (#soon)                       ║{RESET}
+{NEON_GREEN}     ║ [10] > Dmall                     [20] > Next Page (1/2) (#soon)                 ║{RESET}
 {NEON_PINK}      ║                                                                                  ║{RESET}
 {NEON_CYAN}      ╚══════════════════════════════════════════════════════════════════════════════════╝{RESET}
 """
