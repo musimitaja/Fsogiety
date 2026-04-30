@@ -2,6 +2,14 @@ import os
 import time
 import shutil
 
+NEON_PINK = "\033[38;2;255;0;180m"
+NEON_CYAN = "\033[38;2;0;255;255m"
+NEON_PURPLE = "\033[38;2;180;0;255m"
+NEON_GREEN = "\033[38;2;0;255;120m"
+NEON_BLUE = "\033[38;2;80;160;255m"
+NEON_RED = "\033[38;2;255;60;60m"
+RESET = "\033[0m"
+
 def get_terminal_size():
     return shutil.get_terminal_size()
 
@@ -10,34 +18,34 @@ def center_text(text, width):
     centered_lines = [line.center(width) for line in lines]
     return "\n".join(centered_lines)
 
-def blinking():
-    text = """
-██████╗  █████╗ ██████╗ ██╗  ██╗    ███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗
-██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝    ████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██████╔╝
-██║  ██║███████║██████╔╝█████╔╝     ██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗
-██║  ██║██╔══██║██╔══██╗██╔═██╗     ██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║
-██████╔╝██║  ██║██║  ██║██║  ██╗    ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║
-╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+def clear():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
-[██████░░░░░░░░░░░░░░░░░░░░░░░░░░] 18%
-> Initializing core...
-> Linking shadow protocols...
-> Awakening system...
+def blinking():
+    text = f"""
+{NEON_PINK}██████╗  █████╗ ██████╗ ██╗  ██╗    ███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗{RESET}
+{NEON_CYAN}██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝    ████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██████╔╝{RESET}
+{NEON_PURPLE}██║  ██║███████║██████╔╝█████╔╝     ██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗{RESET}
+{NEON_BLUE}██║  ██║██╔══██║██╔══██╗██╔═██╗     ██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║{RESET}
+{NEON_GREEN}██████╔╝██║  ██║██║  ██║██║  ██╗    ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║{RESET}
+{NEON_PINK}╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝{RESET}
+
+{NEON_CYAN}[██████░░░░░░░░░░░░░░░░░░░░░░░░░░] 18%{RESET}
+{NEON_PURPLE}> Initializing core...{RESET}
+{NEON_BLUE}> Linking shadow protocols...{RESET}
+{NEON_GREEN}> Awakening system...{RESET}
 """
+
     terminal_size = get_terminal_size()
     centered_text = center_text(text, terminal_size.columns)
 
-    colors = [
-        "\033[95m",
-        "\033[38;2;255;20;147m",
-        "\033[38;2;255;105;180m",
-    ]
+    colors = [NEON_PINK, NEON_CYAN, NEON_PURPLE, NEON_GREEN, NEON_BLUE]
 
-    for _ in range(6):
+    for _ in range(4):
         for color in colors:
-            os.system('cls' if os.name == 'nt' else 'clear')
-            print(f"{color}{centered_text}\033[0m")
-            time.sleep(0.2)
+            clear()
+            print(f"{color}{centered_text}{RESET}")
+            time.sleep(0.18)
 
 def run_choice(choice):
     if choice == 0:
@@ -83,52 +91,52 @@ def run_choice(choice):
     elif choice == 20:
         os.system('python ./nextpage.py')
     else:
-        print("\033[31m[!] >\033[0m Invalid choice < [!]")
+        print(f"{NEON_RED}[!] > Invalid choice < [!]{RESET}")
         time.sleep(2)
 
 def main():
     blinking()
 
-    menu = """
-             ██████╗  █████╗ ██████╗ ██╗  ██╗    ███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗
-             ██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝    ████╗  ██║██╔════╝╚██╗██╔╝██║   ██║██████╔╝
-             ██║  ██║███████║██████╔╝█████╔╝     ██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗
-             ██║  ██║██╔══██║██╔══██╗██╔═██╗     ██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║
-             ██████╔╝██║  ██║██║  ██║██║  ██╗    ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║
-             ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝
-                          ░                          ░ ░ 
-                                    By Justnutellabrot 
-                                             ║
-                                             ║
-                                             ║
-      ╔══════════════════════════════════════════════════════════════════════════════════╗
-      ║ Dark Nexus | Beta | [0] > Support (discord)                   [ - ] [ □ ] [ X ]  ║
-      ║══════════════════════════════════════════════════════════════════════════════════║
-      ║                                                                                  ║
-      ║ [1] > Tool Info                 [11] > Discord Token Info                        ║
-      ║ [2] > IP Info                   [12] > Discord Token Nuker                       ║
-      ║ [3] > DDOS (#soon)              [13] > Discord Token Joiner                      ║
-      ║ [4] > Mass Report (#soon)       [14] > Discord Token BruteForce                  ║
-      ║ [5] > Phone Number Lookup       [15] > N/A                                       ║
-      ║ [6] > Mail Info                 [16] > Discord Token Generator                   ║
-      ║ [7] > Username Tracker          [17] > Discord Nitro Generator                   ║
-      ║ [8] > SQL Vulnerability         [18] > Discord Server Info                       ║
-      ║ [9] > Discord Raid              [19] > Web Cloner (#soon)                        ║
-      ║ [10] > Dmall                    [20] > Next Page (1/2) (#soon)                   ║
-      ║                                                                                  ║
-      ╚══════════════════════════════════════════════════════════════════════════════════╝
-    """
+    menu = f"""
+{NEON_PINK}             ██████╗  █████╗ ██████╗ ██╗  ██╗    ███╗   ██╗███████╗██╗  ██╗██╗   ██╗███████╗{RESET}
+{NEON_CYAN}             ██╔══██╗██╔══██╗██╔══██╗██║ ██╔╝    ████╗  ██║██╔════╝╚██╗██╔╝██║   ██║███████╗{RESET}
+{NEON_PURPLE}             ██║  ██║███████║██████╔╝█████╔╝     ██╔██╗ ██║█████╗   ╚███╔╝ ██║   ██║███████╗{RESET}
+{NEON_BLUE}             ██║  ██║██╔══██║██╔══██╗██╔═██╗     ██║╚██╗██║██╔══╝   ██╔██╗ ██║   ██║╚════██║{RESET}
+{NEON_GREEN}             ██████╔╝██║  ██║██║  ██║██║  ██╗    ██║ ╚████║███████╗██╔╝ ██╗╚██████╔╝███████║{RESET}
+{NEON_PINK}             ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝{RESET}
+{NEON_CYAN}                          ░                          ░ ░ {RESET}
+{NEON_PURPLE}                                    By Justnutellabrot {RESET}
+{NEON_BLUE}                                             ║{RESET}
+{NEON_GREEN}                                             ║{RESET}
+{NEON_PINK}                                             ║{RESET}
+{NEON_CYAN}      ╔══════════════════════════════════════════════════════════════════════════════════╗{RESET}
+{NEON_PURPLE}      ║ Dark Nexus | Beta | [0] > Support (discord)                     [ - ] [ □ ] [ X ]  ║{RESET}
+{NEON_BLUE}      ║══════════════════════════════════════════════════════════════════════════════════║{RESET}
+{NEON_GREEN}      ║                                                                                  ║{RESET}
+{NEON_PINK}      ║ [1] > Tool Info                 [11] > Discord Token Info                        ║{RESET}
+{NEON_CYAN}      ║ [2] > IP Info                   [12] > Discord Token Nuker                       ║{RESET}
+{NEON_PURPLE}      ║ [3] > DDOS (#soon)              [13] > Discord Token Joiner                      ║{RESET}
+{NEON_BLUE}      ║ [4] > Mass Report (#soon)        [14] > Discord Token BruteForce                  ║{RESET}
+{NEON_GREEN}      ║ [5] > Phone Number Lookup        [15] > N/A                                       ║{RESET}
+{NEON_PINK}      ║ [6] > Mail Info                  [16] > Discord Token Generator                   ║{RESET}
+{NEON_CYAN}      ║ [7] > Username Tracker           [17] > Discord Nitro Generator                   ║{RESET}
+{NEON_PURPLE}      ║ [8] > SQL Vulnerability          [18] > Discord Server Info                       ║{RESET}
+{NEON_BLUE}      ║ [9] > Discord Raid               [19] > Web Cloner (#soon)                        ║{RESET}
+{NEON_GREEN}      ║ [10] > Dmall                     [20] > Next Page (1/2) (#soon)                   ║{RESET}
+{NEON_PINK}      ║                                                                                  ║{RESET}
+{NEON_CYAN}      ╚══════════════════════════════════════════════════════════════════════════════════╝{RESET}
+"""
 
     while True:
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print(f"\033[31m{menu}\033[0m")
+        clear()
+        print(menu)
 
         try:
-            choice = int(input('Choice >> '))
+            choice = int(input(f"{NEON_PINK}Choice >> {RESET}"))
             run_choice(choice)
             time.sleep(1)
         except ValueError:
-            print("\033[31m[!] >\033[0m Invalid choice < [!]")
+            print(f"{NEON_RED}[!] > Invalid choice < [!]{RESET}")
             time.sleep(2)
 
 if __name__ == "__main__":
